@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Change working directory to user's home directory
+cd "${HOME}"
+
+# Ensure that the user's configured login shell is used
+export SHELL="$(getent passwd $USER | cut -d: -f7)"
+
+declare -p >> dcv.log
+
+# Start up desktop
+echo "Launching desktop '<%= context.desktop %>'..." >> dcv.log
+source "<%= session.staged_root.join("desktops", "#{context.desktop}.sh") %>" >> dcv.log
+echo "Desktop '<%= context.desktop %>' ended..." >> dcv.log
+
+if [ -n "${DCV_SESSION_TIMEOUT}" ]; then
+    echo "Sleeping for session timeout, close in case of kills"
+    sleep ${DCV_SESSION_TIMEOUT} || ( dcv close-session $(basename ${PBS_O_WORKDIR}) ; touch .session_complete )
+fi

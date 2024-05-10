@@ -1,0 +1,12 @@
+---
+cluster: "pbs_cluster"
+batch_connect:
+  template: "dcv"
+script:
+  job_name: "dcv"
+  queue_name: "dcv"
+  native:
+    - "-l"
+    - "nodes=<%= server %>"
+    - "-v"
+    - "DCV_SESSION_TIMEOUT=<%= session_timeout %>"

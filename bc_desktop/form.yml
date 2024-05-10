@@ -1,0 +1,24 @@
+---
+attributes:
+  desktop: "dcv"
+  instance_type:
+    widget: select
+    help: "Instance type"
+    options:
+      - [ "g4dn.4xlarge", "ip-10-0-0-1" ]
+      - [ "g5.4xlarge", "ip-10-0-0-2" ]
+
+  session_timeout:
+    widget: select
+    options:
+      - [ "2 hours", "2h" ]
+      - [ "4 hours", "4h" ]
+      - [ "8 hours", "8h" ]
+      - [ "1 day", "1d" ]
+      - [ "4 days", "4d" ]
+    label: "Session timeout"
+
+form:
+  - desktop
+  - instance_type
+  - session_timeout

@@ -1,0 +1,35 @@
+<div>
+<% data_root = ENV['OOD_DATAROOT'] %>
+<% server_file = data_root + '/batch_connect/sys/bc_desktop/output/' + id + '/.server' %>
+<% passwd_file = data_root + '/batch_connect/sys/bc_desktop/output/' + id + '/.session.pwd' %>
+<% dcv_file = data_root + '/batch_connect/sys/bc_desktop/output/' + id + '/' + id + '.dcv' %>
+<% session_complete_file = data_root + '/batch_connect/sys/bc_desktop/output/' + id + '/.session_complete' %>
+
+<% if File.exists?(session_complete_file) %>
+
+<div> Session closed </div>
+
+<% elsif File.exists?(passwd_file) %>
+<%   server_erb = ERB.new(File.read(server_file)) %>
+<%   passwd_erb = ERB.new(File.read(passwd_file)) %>
+<%   server = server_erb.result().to_s -%>
+<%   passwd = Base64.decode64(passwd_erb.result().to_s) -%>
+<%   ALB_url = ENV['ALB_DNS'] %>
+<%   dcv_url = 'https://' + ALB_url + '/' + server + '/?authToken=' + passwd + '#' + id %>
+<%   dcv_file_url = 'https://' + ALB_url + '/pun/sys/dashboard/files/fs' + dcv_file + '?download=1' %>
+<%   dcv_copy_url = ALB_url + ':443/' + server + '/?authToken=' + passwd + '#' + id %>
+
+<button class="btn btn-primary" type="submit" onclick="window.open('<%= dcv_url %>', '_blank')">Connect via browser</button>
+<button class="btn btn-primary" type="submit" onclick="window.open('<%= dcv_file_url %>', '_blank')">Connect via NICE DCV client</button>
+<button id="connect_clipboard" class="btn btn-primary" type="submit" onclick="navigator.clipboard.writeText('<%= dcv_copy_url %>'); document.getElementById('connect_clipboard').innerHTML = 'Copied!'">Copy connection URL</button>
+<br/><br/>
+
+<div> You can download <b>NICE DCV Client</b> from: <a href="https://download.nice-dcv.com" target="_blank">download.nice-dcv.com</a></div>
+<br/>
+
+<% else %>
+
+<div> Setting up connection... </div>
+
+<% end %>
+</div>
