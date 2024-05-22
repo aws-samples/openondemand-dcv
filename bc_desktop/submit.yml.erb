@@ -7,6 +7,6 @@ script:
   queue_name: "dcv"
   native:
     - "-l"
-    - "nodes=<%= server %>"
+    - "nodes=<%= instance_type %>"
     - "-v"
     - "DCV_SESSION_TIMEOUT=<%= session_timeout %>"

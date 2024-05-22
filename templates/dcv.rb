@@ -30,7 +30,7 @@ module OodCore
               # retrieve connection url name
               ip_addresses=$(ip -o address show | awk '$2 == "lo" { next } $2 == "virbr0" { next } $3 == "inet" { print substr($4,1,index($4,"/")-1)}')
               hostname_ip=$(hostname -s | sed 's/^ip-//;s/-/\./g')
-              url_path=$(echo "${ip_addresses}" | sed "/${hostname_ip}/d" | sed 's/\\./-/g;s/^/ip-/')
+              url_path=$(echo "${ip_addresses}" | sed '/'"${hostname_ip}"'/!d' | sed 's/\\./-/g;s/^/ip-/')
               dcv_server=$(echo "${url_path}" | tr -d '\\n')
               printf "${dcv_server}" > .server
               # create session
@@ -66,7 +66,7 @@ module OodCore
               echo "format=1.0" >> #{session_id}.dcv
               echo "" >> #{session_id}.dcv
               echo "[connect]" >> #{session_id}.dcv
-              echo "host={{ server_url }}" >> #{session_id}.dcv
+              echo "host=${ALB_URL}" >> #{session_id}.dcv
               echo "weburlpath=/${dcv_server}" >> #{session_id}.dcv
               echo "port=443" >> #{session_id}.dcv
               echo "sessionid=#{session_id}" >> #{session_id}.dcv
