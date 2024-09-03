@@ -1,12 +1,5 @@
 # Open OnDemand DCV integration
 
-**Professional Services**
-Copyright 2024, Amazon Web Services, Inc. or its affiliates. All Rights Reserved. This AWS Content is provided subject to the terms of the AWS Customer Agreement available at http://aws.amazon.com/agreement or other written agreement between Customer and Amazon Web Services, Inc.; provided that AWS grants Customer a worldwide, royalty-free, non-exclusive, nontransferable license to use, reproduce, display, perform, and prepare derivative works of this AWS Content. Except as provided herein, Customer obtains no other rights from AWS, its affiliates, or their licensors to this AWS Content, including without limitation any related intellectual property rights. AWS will be the exclusive owner of any modifications to or derivative works of this AWS Content. Customer acknowledges that this AWS Content is provided “as is” without representations or warranties of any kind. Customer is solely responsible for testing, deploying, maintaining and supporting this AWS Content and for determining the suitability of this AWS Content for its business purposes.
-
-**Roberto Meda, Alberto Falzone
-**
-**Last update: 2024-05**
-
 # Summary
 
 [**Open OnDemand**](https://openondemand.org/) is a project by the [Ohio Supercomputer Center (OSC)](https://www.osc.edu/) funded with a National Science Foundation grant to develop open source software that provides HPC centers with advanced web ~~~~ interface capabilities to ease access to their HPC resources, including the support of multiple job schedulers like LSF, Grid Engine, PBS, Torque and Slurm.
